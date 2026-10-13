@@ -1,5 +1,6 @@
 package com.mycompany.reservasihotel;
 
+import config.Koneksi;
 import controller.ReservasiController;
 import java.util.Scanner;
 import view.ReservasiView;
@@ -8,11 +9,17 @@ public class SistemReservasiHotel {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        if (Koneksi.getConnection() != null) {
+            Scanner scanner = new Scanner(System.in);
 
-        ReservasiView view = new ReservasiView();
-        ReservasiController controller = new ReservasiController(view, scanner);
+            ReservasiView view = new ReservasiView();
+            ReservasiController controller = new ReservasiController(view, scanner);
 
-        controller.jalankan();
+            controller.jalankan();
+
+            scanner.close();
+        } else {
+            System.out.println("Gagal terhubung ke Database. Program dihentikan.");
+        }
     }
 }

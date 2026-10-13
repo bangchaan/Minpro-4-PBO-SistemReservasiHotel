@@ -1,19 +1,25 @@
 package model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("VIP")
 public class ReservasiVIP extends Reservasi {
 
-    public static final String PENYAMBUTAN_REGULER = "Reguler";
-    public static final String PENYAMBUTAN_LOUNGE = "Executive Lounge";
-    public static final String PENYAMBUTAN_AIRPORT = "Airport Pickup + Lounge";
-
+    @Column(name = "jenis_penyambutan")
     private String jenisPenyambutan;
+
+    @Column(name = "biaya_penyambutan")
     private int biayaPenyambutan;
 
+    public ReservasiVIP() {
+    }
+
     public ReservasiVIP(int idReservasi, String namaTamu,
-            int jumlahMalam, String jenisPenyambutan) {
-
+                        int jumlahMalam, String jenisPenyambutan) {
         super(idReservasi, namaTamu, jumlahMalam, 750000);
-
         setJenisPenyambutan(jenisPenyambutan);
     }
 
@@ -21,27 +27,21 @@ public class ReservasiVIP extends Reservasi {
         return jenisPenyambutan;
     }
 
-    public int getBiayaPenyambutan() {
-        return biayaPenyambutan;
+    public void setJenisPenyambutan(String jenisPenyambutan) {
+        this.jenisPenyambutan = jenisPenyambutan;
+
+        if (jenisPenyambutan.equalsIgnoreCase("Reguler")) {
+            biayaPenyambutan = 0;
+        } else if (jenisPenyambutan.equalsIgnoreCase("Executive Lounge")) {
+            biayaPenyambutan = 100000;
+        } else if (jenisPenyambutan.equalsIgnoreCase(
+                "Airport Pickup + Lounge")) {
+            biayaPenyambutan = 200000;
+        }
     }
 
-    public void setJenisPenyambutan(String jenisPenyambutan) {
-
-        if (PENYAMBUTAN_LOUNGE.equals(jenisPenyambutan)) {
-
-            this.jenisPenyambutan = PENYAMBUTAN_LOUNGE;
-            this.biayaPenyambutan = 100000;
-
-        } else if (PENYAMBUTAN_AIRPORT.equals(jenisPenyambutan)) {
-
-            this.jenisPenyambutan = PENYAMBUTAN_AIRPORT;
-            this.biayaPenyambutan = 200000;
-
-        } else {
-
-            this.jenisPenyambutan = PENYAMBUTAN_REGULER;
-            this.biayaPenyambutan = 0;
-        }
+    public int getBiayaPenyambutan() {
+        return biayaPenyambutan;
     }
 
     @Override
@@ -52,9 +52,7 @@ public class ReservasiVIP extends Reservasi {
     @Override
     public String getDetailTambahan() {
         return "Penyambutan: " + jenisPenyambutan
-                + " (+Rp"
-                + String.format("%,d", biayaPenyambutan)
-                + ")";
+                + " (Rp" + biayaPenyambutan + ")";
     }
 
     @Override

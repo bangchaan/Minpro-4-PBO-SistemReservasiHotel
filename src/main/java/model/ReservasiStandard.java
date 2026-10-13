@@ -1,15 +1,23 @@
 package model;
 
-public class ReservasiStandard extends Reservasi implements DapatDidenda {
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
-    private int dendaPersen;
+@Entity
+@DiscriminatorValue("Standard")
+public class ReservasiStandard extends Reservasi
+        implements DapatDidenda {
+
+    @Column(name = "denda_persen")
+    private int dendaPersen = 20;
+
+    public ReservasiStandard() {
+    }
 
     public ReservasiStandard(int idReservasi, String namaTamu,
-            int jumlahMalam) {
-
+                             int jumlahMalam) {
         super(idReservasi, namaTamu, jumlahMalam, 300000);
-
-        setDendaPersen(20);
     }
 
     public int getDendaPersen() {
@@ -17,11 +25,7 @@ public class ReservasiStandard extends Reservasi implements DapatDidenda {
     }
 
     public void setDendaPersen(int dendaPersen) {
-        if (dendaPersen >= 0 && dendaPersen <= 100) {
-            this.dendaPersen = dendaPersen;
-        } else {
-            this.dendaPersen = 20;
-        }
+        this.dendaPersen = dendaPersen;
     }
 
     @Override
@@ -31,7 +35,7 @@ public class ReservasiStandard extends Reservasi implements DapatDidenda {
 
     @Override
     public String getDetailTambahan() {
-        return "Denda batal: " + dendaPersen + "%";
+        return "Denda pembatalan: " + dendaPersen + "%";
     }
 
     @Override
