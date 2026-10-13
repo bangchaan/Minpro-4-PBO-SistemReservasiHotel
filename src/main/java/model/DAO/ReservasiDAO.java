@@ -116,7 +116,6 @@ public class ReservasiDAO {
         }
     }
 
-    // Mengubah SATU baris ResultSet menjadi objek ReservasiStandard / ReservasiVIP
     private Reservasi buatObjek(ResultSet rs) throws SQLException {
         int id = rs.getInt("id_reservasi");
         String tipe = rs.getString("tipe");

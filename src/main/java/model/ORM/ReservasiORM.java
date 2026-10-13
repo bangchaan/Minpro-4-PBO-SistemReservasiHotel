@@ -62,13 +62,12 @@ public class ReservasiORM {
         EntityManager em = JPAUtil.getEntityManager();
 
         try {
-            // Cek dulu agar merge() tidak diam-diam menambah baris baru
             if (em.find(Reservasi.class, reservasi.getIdReservasi()) == null) {
                 return false;
             }
 
             em.getTransaction().begin();
-            em.merge(reservasi);        // UPDATE
+            em.merge(reservasi);        
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
