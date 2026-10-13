@@ -1,4 +1,4 @@
-# DOKUMENTASI MINI PROJECT 3
+# DOKUMENTASI MINI PROJECT 4
 
 ---
 
@@ -474,12 +474,12 @@ Gambar di atas berfungsi untuk menghapus data yang sebelumnya sudah di tambahkan
 
 gambar-gambar di atas menunjukkan pengujian ORM, pengguna tidak perlu input-input karena sudah terotomisasi.
 
-# BAB IV KESIMPULAN
+# BAB VII KESIMPULAN
 
 Sistem Reservasi Hotel merupakan program Java yang digunakan untuk mengelola dan memantau data reservasi hotel secara sederhana.
 
 Program menyediakan fitur tambah reservasi, tampilkan reservasi, check-in, check-out, update jumlah malam, dan hapus reservasi. Program juga membedakan reservasi menjadi Standard dan VIP dengan karakteristik dan aturan biaya yang berbeda.
 
-Dalam pembuatannya, program menerapkan konsep Pemrograman Berorientasi Objek seperti **encapsulation, inheritance, polymorphism, constructor, getter dan setter, interface, dan abstraction**. Selain itu, program menggunakan pola **Model-View-Controller (MVC)** untuk memisahkan bagian model, tampilan, dan proses pengendalian.
+Dalam pembuatannya, program menerapkan konsep Pemrograman Berorientasi Objek seperti **encapsulation, inheritance, polymorphism, constructor, getter dan setter, interface, dan abstraction, JDBC dan ORM**. Selain itu, program menggunakan pola **Model-View-Controller (MVC)** untuk memisahkan bagian model, tampilan, dan proses pengendalian.
 
 Dengan penerapan konsep tersebut, program menjadi lebih terstruktur dan setiap class memiliki fungsi yang lebih jelas dalam pengelolaan sistem reservasi hotel.
