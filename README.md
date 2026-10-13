@@ -235,7 +235,7 @@ Menu Keluar digunakan untuk menghentikan program.
 
 # BAB IV PENERAPAN KONSEP PBO
 
-## 3.1 Abstraction
+## 4.1 Abstraction
 
 <img width="470" height="77" alt="image" src="https://github.com/user-attachments/assets/2f26341c-b088-44af-8ebe-c94006285d12" />
 
@@ -247,7 +247,7 @@ Pada class Reservasi terdapat dua abstract method, yaitu getTipe() dan getDetail
 
 ---
 
-## 3.3 Inheritance
+## 4.2 Inheritance
 
 Inheritance digunakan untuk membuat hubungan antara superclass dan subclass.
 
@@ -263,7 +263,7 @@ Pada program ini:
 
 Class `Reservasi` menjadi superclass, sedangkan `ReservasiStandard` dan `ReservasiVIP` menjadi subclass.
 
-### 3.3.1 Reservasi Standard
+### 4.2.1 Reservasi Standard
 
 <img width="528" height="80" alt="image" src="https://github.com/user-attachments/assets/6e7fb0cb-c33c-4b4d-960c-82fbeefc1f33" />
 
@@ -272,7 +272,7 @@ Reservasi Standard memiliki karakteristik khusus berupa kebijakan **denda pembat
 
 Atribut tersebut digunakan untuk menentukan jumlah denda ketika reservasi Standard dibatalkan sebelum selesai.
 
-### 3.3.2. Reservasi VIP
+### 4.2.2. Reservasi VIP
 
 
 <img width="460" height="120" alt="image" src="https://github.com/user-attachments/assets/a7c47971-e4ad-478a-a0ff-cbd38d48f81e" />
@@ -292,7 +292,7 @@ Setiap jenis penyambutan memiliki biaya tambahan yang berbeda.
 
 ---
 
-## 3.4 Encapsulation
+## 4.3 Encapsulation
 
 Encapsulation diterapkan dengan menggunakan access modifier `private` pada atribut class.
 
@@ -310,18 +310,18 @@ Atribut tersebut tidak dapat diakses secara langsung dari luar class.
 
 Pengambilan data dilakukan melalui getter, sedangkan perubahan data dilakukan melalui setter.
 
-<img width="342" height="82" alt="image" src="https://github.com/user-attachments/assets/baf382de-9c39-4d58-bc29-ea9bec39151a" />
+<img width="375" height="76" alt="image" src="https://github.com/user-attachments/assets/520a03cc-9e35-46a2-809f-c6065454a147" />
 
 
 Dengan cara tersebut, data reservasi dapat dikontrol dan divalidasi melalui method yang telah disediakan oleh class.
 
-<img width="596" height="160" alt="image" src="https://github.com/user-attachments/assets/2c4ff06d-124e-460a-bee3-afd676987324" />
+<img width="495" height="82" alt="image" src="https://github.com/user-attachments/assets/ee422af6-e506-4243-b608-f85ce6be24dd" />
 
 Sedangkan untuk mengubah data digunakan setter seperti gambar di atas
 
 ---
 
-## 3.5 Constructor
+## 4.4 Constructor
 
 Constructor digunakan untuk memberikan nilai awal ketika object dibuat.
 
@@ -355,9 +355,9 @@ Contohnya:
 
 ---
 
-## 3.6 Polymorphism
+## 4.5 Polymorphism
 
-### 3.6.1 Method Overloading
+### 4.5.1 Method Overloading
 
 <img width="892" height="412" alt="image" src="https://github.com/user-attachments/assets/c6ce62d0-d29f-479b-aa4b-d2490a506ea3" />
 
@@ -367,7 +367,7 @@ Method pertama menerima parameter ArrayList<Reservasi> dan digunakan untuk menam
 
 Dengan adanya method overloading, satu nama method dapat digunakan untuk beberapa kebutuhan yang berbeda berdasarkan parameter yang diberikan.
 
-### 3.6.1 Method Overriding
+### 4.5.2 Method Overriding
 Saya menerapkan method overriding pada class ReservasiStandard dan ReservasiVIP. Method overriding terjadi ketika subclass membuat kembali method yang sudah didefinisikan pada superclass Reservasi dengan implementasi yang disesuaikan dengan jenis reservasinya.
 
 <img width="606" height="356" alt="image" src="https://github.com/user-attachments/assets/dd7c4dd4-08ee-4340-ab3a-ac1071d632af" />
@@ -380,7 +380,7 @@ Pada ReservasiVIP, method getTipe() mengembalikan nilai **"VIP", sedangkan getDe
 
 Dengan adanya method overriding, method yang sama dapat memiliki perilaku yang berbeda sesuai dengan subclass yang digunakan.
 
-## 3.7 Interface (nilai tambah)
+## 4.6 Interface 
 
 <img width="572" height="222" alt="image" src="https://github.com/user-attachments/assets/264a90f7-320a-4e91-a0d9-afc8c68b4b0d" />
 
@@ -395,7 +395,84 @@ Dengan implements DapatDidenda, class ReservasiStandard harus menyediakan implem
 Method tersebut digunakan untuk menghitung denda pembatalan berdasarkan total biaya reservasi dan persentase denda yang dimiliki oleh Reservasi Standard.
 Dengan demikian, interface DapatDidenda memberikan aturan bahwa class yang mengimplementasikannya harus memiliki kemampuan untuk menghitung denda.
 
+
 ---
+
+# BAB V INTEGRASI DATABASE MENGGUNAKAN JDBC
+
+## 5.1 Koneksi Database
+
+<img width="821" height="313" alt="image" src="https://github.com/user-attachments/assets/78c74ac6-7666-441d-b5fd-203e9142908e" />
+
+## 5.2 Implementasi PreparedStatement dan CRUD
+
+<img width="1060" height="622" alt="image" src="https://github.com/user-attachments/assets/229273d8-24f7-40e3-8ba0-028a89145e14" />
+
+ReservasiDAO.java menerapkan pola Data Access Object (DAO) untuk memisahkan akses database dari controller. Operasi CRUD dilakukan menggunakan query SQL dan PreparedStatement, sehingga input pengguna diberikan melalui parameter yang sesuai. Pada gambar di atas digunakan untuk menambah data.
+
+<img width="711" height="138" alt="image" src="https://github.com/user-attachments/assets/8884cd02-f584-42a7-9872-840a6f1bf320" />
+
+Gambar di atas berfungsi untuk menampilkan seluruh data yang sebelumnya sudah di tambahkan di dalam database.
+
+<img width="968" height="132" alt="image" src="https://github.com/user-attachments/assets/ac8ee410-0cf8-4bfd-9047-c761b0bd7b86" />
+
+
+Gambar di atas berfungsi untuk mengubah data yang sebelumnya sudah di tambahkan di dalam database.
+
+<img width="651" height="96" alt="image" src="https://github.com/user-attachments/assets/12b8d9d9-dfb4-45c6-9269-2b50603378ce" />
+
+Gambar di atas berfungsi untuk menghapus data yang sebelumnya sudah di tambahkan di dalam database.
+
+## 5.3 Pengujian Koneksi
+
+<img width="693" height="245" alt="image" src="https://github.com/user-attachments/assets/83e3b0fc-21d5-4241-9c2d-06776858997a" />
+
+Pengujian dilakukan menggunakan TestKoneksi.java untuk memastikan koneksi antara Java dan MySQL berhasil. Keberhasilan koneksi ditunjukkan melalui pesan pada console bahwa database siap digunakan.
+
+<img width="713" height="200" alt="image" src="https://github.com/user-attachments/assets/773063c9-84c4-45db-b56a-2f83156b2002" />
+
+
+# BAB VI Penerapan Nilai Tambah ORM
+
+## 6.1 Konfigurasi ORM
+
+<img width="777" height="288" alt="image" src="https://github.com/user-attachments/assets/e9762855-859e-439c-aa06-7b1384f470b6" />
+
+JPAUtil.java digunakan untuk menyediakan EntityManager melalui konfigurasi JPA/Hibernate. EntityManager menjadi sarana untuk mengelola objek reservasi yang dipetakan sebagai entity dan menjalankan operasi database menggunakan ORM.
+
+## 6.2 Implementasi CRUD ORM
+
+### 6.2.1 Create 
+
+<img width="345" height="92" alt="image" src="https://github.com/user-attachments/assets/3ba88fbd-45c8-4e82-80e2-6ad09ced88b4" />
+
+Gambar di atas berfungsi untuk menambahkan  data yang sebelumnya sudah di tambahkan di dalam database.
+
+### 6.2.2 Read
+<img width="895" height="187" alt="image" src="https://github.com/user-attachments/assets/3284145c-0524-4b16-ba1b-9acca0a3db33" />
+
+Gambar di atas berfungsi untuk menampilkan seluruh data yang sebelumnya sudah di tambahkan di dalam database.
+
+
+### 6.2.3 Update
+
+<img width="557" height="161" alt="image" src="https://github.com/user-attachments/assets/b831f0a8-0b57-4591-897a-27071fca9eac" />
+
+Gambar di atas berfungsi untuk mengubah data yang sebelumnya sudah di tambahkan di dalam database.
+
+### 6.2.4 Delete
+<img width="370" height="91" alt="image" src="https://github.com/user-attachments/assets/4978df27-19bd-4429-ba50-5ac8a2f41a13" />
+
+Gambar di atas berfungsi untuk menghapus data yang sebelumnya sudah di tambahkan di dalam database.
+
+
+## 6.3 Pengujian ORM
+
+<img width="672" height="422" alt="image" src="https://github.com/user-attachments/assets/f1d8de9e-93d2-4105-95ed-65de0fda2d17" />
+
+<img width="1776" height="272" alt="image" src="https://github.com/user-attachments/assets/bc8e5750-9bee-49f9-9058-7704864cf98b" />
+
+gambar-gambar di atas menunjukkan pengujian ORM, pengguna tidak perlu input-input karena sudah terotomisasi.
 
 # BAB IV KESIMPULAN
 
