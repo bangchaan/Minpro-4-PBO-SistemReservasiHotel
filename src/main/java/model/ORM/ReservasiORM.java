@@ -31,7 +31,6 @@ public class ReservasiORM {
         EntityManager em = JPAUtil.getEntityManager();
 
         try {
-            // find() otomatis menghasilkan ReservasiStandard atau ReservasiVIP
             return em.find(Reservasi.class, id);
         } catch (Exception e) {
             System.out.println("Gagal mencari reservasi (ORM) - " + e.getMessage());
