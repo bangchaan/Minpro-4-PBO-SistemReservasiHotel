@@ -1,10 +1,11 @@
-# DOKUMENTASI MINI PROJECT 2
+# DOKUMENTASI MINI PROJECT 3
 
 ---
 
 ## SISTEM RESERVASI HOTEL
 
 **Nama:** Aulia Aisyah Al Humaira
+
 **NIM:** 2509116029
 
 ---
@@ -23,7 +24,7 @@ Setiap data reservasi memiliki informasi seperti ID reservasi, nama tamu, jumlah
 
 Program memiliki dua jenis reservasi, yaitu **Reservasi Standard** dan **Reservasi VIP**. Reservasi Standard memiliki kebijakan denda pembatalan sebesar 20%, sedangkan Reservasi VIP memiliki pilihan jenis penyambutan yang dapat memengaruhi biaya reservasi.
 
-Dalam pembuatannya, program menerapkan beberapa konsep Pemrograman Berorientasi Objek (PBO), yaitu **encapsulation, inheritance, polymorphism, dan constructor**. Program juga menggunakan pola **Model-View-Controller (MVC)** untuk memisahkan bagian data, tampilan, dan proses pengendalian program.
+Dalam pembuatannya, program menerapkan beberapa konsep Pemrograman Berorientasi Objek (PBO), yaitu **encapsulation, inheritance, polymorphism, constructor, dan abstraction**. Program juga menggunakan pola **Model-View-Controller (MVC)** untuk memisahkan bagian data, tampilan, dan proses pengendalian program.
 
 ---
 
@@ -51,21 +52,66 @@ Setelah data berhasil dibuat, reservasi akan masuk ke dalam daftar reservasi den
 Program akan terus berjalan sampai pengguna memilih menu **Keluar**.
 
 ---
+# BAB II  STRUKTUR PACKAGE
 
-# BAB II ALUR PROGRAM
+Program menggunakan struktur package untuk memisahkan komponen berdasarkan tanggung jawabnya.
 
-## 2.1 Menu Utama
+## 2.1 Package `com.mycompany.reservasihotel`
+
+Berisi `SistemReservasiHotel.java` sebagai main class dan titik awal eksekusi program.
+
+## 2.2 Package `config`
+
+- `Koneksi.java`: mengatur koneksi JDBC ke MySQL.
+- `TestKoneksi.java`: menguji koneksi JDBC.
+- `JPAUtil.java`: menyediakan `EntityManagerFactory` untuk JPA/Hibernate.
+- `TestORM.java`: menjalankan pengujian CRUD menggunakan ORM.
+
+## 2.3 Package `controller`
+
+Berisi `ReservasiController.java` yang memproses pilihan pengguna dan menghubungkan model, view, serta akses database.
+
+## 2.4 Package `model`
+
+- `Reservasi.java`: superclass yang menyimpan atribut dan perilaku umum reservasi.
+- `ReservasiStandard.java`: subclass dengan aturan denda pembatalan.
+- `ReservasiVIP.java`: subclass dengan layanan penyambutan dan biaya tambahan.
+- `DapatDidenda.java`: interface untuk kemampuan menghitung denda pembatalan.
+
+## 2.5 Package `model.DAO`
+
+Berisi `ReservasiDAO.java` yang menangani operasi CRUD menggunakan JDBC dan query SQL melalui `PreparedStatement`.
+
+## 2.6 Package `model.ORM`
+
+Berisi `ReservasiORM.java` yang mengimplementasikan operasi CRUD melalui JPA/Hibernate dengan `EntityManager`. Method yang tersedia meliputi `tambahReservasi()`, `cariReservasiById()`, `getAllReservasi()`, `updateReservasi()`, dan `hapusReservasi()`.
+
+## 2.7 Package `view`
+
+Berisi `ReservasiView.java` yang menampilkan menu, daftar reservasi, status, dan pesan kepada pengguna.
+
+### 2.8 File Konfigurasi
+
+- `pom.xml`: mengatur dependency JDBC dan Hibernate.
+- `src/main/resources/META-INF/persistence.xml`: mengatur persistence unit JPA/Hibernate.
+- File SQL database, jika disertakan, digunakan untuk menyiapkan database dan tabel reservasi.
+  
+---
+
+# BAB III ALUR PROGRAM
+
+## 3.1 Menu Utama
 
 <img width="380" height="273" alt="image" src="https://github.com/user-attachments/assets/52b89b24-3bd3-4255-b98a-5b856691de1c" />
 
 
-Gambar di atas menampilkan Menu Utama dari program Sistem Tracking Reservasi Hotel. Menu ini menjadi tampilan awal yang digunakan sebagai pusat navigasi bagi pengguna dalam mengelola data reservasi hotel. Terdapat beberapa pilihan menu, yaitu Tambah Reservasi untuk menambahkan data reservasi baru, Tampilkan Semua Reservasi untuk melihat seluruh data reservasi yang telah tersimpan, Check-In Tamu dan Check-Out Tamu untuk mengubah status reservasi, Update Jumlah Malam untuk memperbarui lama menginap, Hapus Reservasi untuk menghapus data reservasi, serta Keluar untuk mengakhiri program.
+Gambar di atas menampilkan Menu Utama dari program Sistem Tracking Reservasi Hotel. Menu ini menjadi tampilan awal yang digunakan sebagai pusat navigasi bagi pengguna dalam mengelola data reservasi hotel. Terdapat beberapa pilihan menu, yaitu Tambah Reservasi untuk menambahkan data reservasi baru, Tampilkan Reservasi untuk melihat data reservasi yang telah tersimpan, Check-In Tamu dan Check-Out Tamu untuk mengubah status reservasi, Update Jumlah Malam untuk memperbarui lama menginap, Hapus Reservasi untuk menghapus data reservasi, serta Keluar untuk mengakhiri program.
 
 Pengguna dapat memilih menu sesuai dengan kebutuhan pengelolaan reservasi melalui pilihan nomor yang tersedia. Dengan adanya Menu Utama ini, proses pengelolaan dan tracking data reservasi hotel dapat dilakukan secara lebih terstruktur dan mudah digunakan.
 
 ---
 
-## 2.2 Menu Tambah Reservasi
+## 3.2 Menu Tambah Reservasi
 
 <img width="557" height="150" alt="image" src="https://github.com/user-attachments/assets/ca92f490-3e1e-423d-85d6-d846f6a43589" />
 
@@ -75,7 +121,7 @@ Reservasi Standard memiliki harga Rp300.000 per malam dengan ketentuan denda pem
 
 Dengan adanya menu ini, pengguna dapat menentukan jenis reservasi sesuai kebutuhan sebelum memasukkan data tamu dan informasi reservasi.
 
-### 2.2.1 Tambah Reservasi Standard
+## 3.2.1 Tambah Reservasi Standard
 
 <img width="541" height="173" alt="image" src="https://github.com/user-attachments/assets/d476d9e4-466f-43d1-952e-51b6368ba481" />
 
@@ -88,7 +134,7 @@ Pada contoh tersebut, tamu melakukan reservasi Standard selama 2 malam. Setelah 
 
 ---
 
-## 2.2.2 Tambah Reservasi VIP
+## 3.2.2 Tambah Reservasi VIP
 
 <img width="555" height="277" alt="image" src="https://github.com/user-attachments/assets/69657d4a-a4cf-42d1-af1f-79ca5f8d01f6" />
 
@@ -98,20 +144,28 @@ Pada contoh tersebut, tamu bernama Lia melakukan reservasi selama 10 malam dan m
 
 ---
 
-## 2.3 Menu Tampilkan Reservasi
+## 3.3 Menu Tampilkan Semua Reservasi
 
-<img width="1171" height="221" alt="Screenshot 2026-09-23 220612" src="https://github.com/user-attachments/assets/a54efbc6-0c3e-469e-bfc2-707bfa4862ef" />
+<img width="887" height="307" alt="image" src="https://github.com/user-attachments/assets/82a8f258-23da-4349-97d2-4c297b17fb8a" />
 
+Gambar di atas menampilkan Daftar Reservasi pada program Sistem Tracking Reservasi Hotel. Menu ini digunakan untuk melihat seluruh data reservasi yang telah tersimpan di dalam sistem. Informasi yang ditampilkan meliputi ID, Nama Tamu, Tipe, Malam, Status, Total Biaya, dan Detail.
 
-Gambar di atas menampilkan Daftar Reservasi pada program Sistem Tracking Reservasi Hotel. Menu ini digunakan untuk melihat seluruh data reservasi yang telah tersimpan di dalam sistem. Informasi yang ditampilkan meliputi ID reservasi, nama tamu, tipe reservasi, jumlah malam, status, total biaya, dan detail tambahan.
+Pada daftar tersebut terdapat tiga data reservasi, yaitu Karina dengan tipe Standard dan status Menunggu, Bang Chan dengan tipe VIP dan status Check-In, serta Honey bee dengan tipe Standard dan status Check-Out. Total biaya setiap reservasi ditampilkan sesuai dengan tipe dan jumlah malam. Pada reservasi VIP, bagian detail menampilkan jenis penyambutan yang digunakan beserta biaya tambahannya.
 
-Pada daftar tersebut terdapat reservasi Standard dan VIP dengan status yang berbeda, yaitu Menunggu, Check-In, dan Check-Out. Pada reservasi VIP, bagian detail juga menampilkan jenis penyambutan yang dipilih beserta biaya tambahannya.
-
-Dengan adanya menu ini, pengguna dapat melihat dan memantau data serta status seluruh reservasi yang tersimpan dalam sistem.
+Dengan adanya menu ini, pengguna dapat melihat dan memantau data reservasi beserta status dan total biaya yang tersimpan dalam sistem.
 
 ---
+## 3.4 Menu Tampilkan berdasarkan Status
 
-## 2.4 Menu Check-In
+<img width="903" height="297" alt="Screenshot 2026-10-03 110121" src="https://github.com/user-attachments/assets/24ede16c-cd64-4bcb-aed5-341bff06e2dc" />
+
+Gambar di atas menampilkan menu Pilih Status pada program Sistem Tracking Reservasi Hotel. Menu ini digunakan untuk menampilkan data reservasi berdasarkan status tertentu. Pengguna dapat memilih status Menunggu, Check-In, atau Check-Out.
+
+Pada contoh tersebut, pengguna memilih status Menunggu. Sistem kemudian menampilkan reservasi yang memiliki status Menunggu, yaitu reservasi dengan nama tamu Karina, tipe Standard, jumlah menginap 2 malam, dan total biaya Rp600.000.
+
+Dengan adanya fitur ini, pengguna dapat melihat data reservasi berdasarkan status yang dipilih sehingga proses pemantauan reservasi menjadi lebih mudah dan teratur.
+
+## 3.5 Menu Check-In
 
 <img width="292" height="82" alt="Screenshot 2026-09-23 220927" src="https://github.com/user-attachments/assets/26ecf010-502e-4969-9a23-efa124020e0f" />
 
@@ -127,7 +181,7 @@ Fitur Check-In digunakan untuk mencatat bahwa tamu telah melakukan proses masuk 
 
 ---
 
-## 2.5 Menu Check-Out
+## 3.6 Menu Check-Out
 
 <img width="293" height="111" alt="image" src="https://github.com/user-attachments/assets/dfe58c77-b35d-4c73-8f88-008a5452f22d" />
 
@@ -143,7 +197,7 @@ Fitur Check-Out digunakan untuk mencatat bahwa tamu telah selesai menginap dan k
 
 ---
 
-## 2.6 Menu Update
+## 3.7 Menu Update
 
 <img width="326" height="107" alt="image" src="https://github.com/user-attachments/assets/b3df9b86-ca44-4532-8489-11af040d54c1" />
 
@@ -157,7 +211,7 @@ Dengan adanya fitur ini, pengguna dapat memperbarui lama menginap pada reservasi
 
 ---
 
-## 2.7 Menu Hapus
+## 3.8 Menu Hapus
 
 <img width="672" height="128" alt="image" src="https://github.com/user-attachments/assets/66c031b2-d857-4ac0-a19d-583829d04fb5" />
 
@@ -172,38 +226,28 @@ Gambar berikutnya menunjukkan bahwa reservasi dengan ID 1 sudah tidak terdapat d
 
 ---
 
-## 2.8 Menu Keluar
+## 3.9 Menu Keluar
 
 Menu Keluar digunakan untuk menghentikan program.
 
 
 ---
 
-# BAB III PENERAPAN KONSEP PBO
+# BAB IV PENERAPAN KONSEP PBO
 
-## 3.1 MVC (Model View Controller)
+## 3.1 Abstraction
 
-<img width="386" height="262" alt="image" src="https://github.com/user-attachments/assets/695422ae-81e5-4a85-ac93-f777569fb416" />
+<img width="470" height="77" alt="image" src="https://github.com/user-attachments/assets/2f26341c-b088-44af-8ebe-c94006285d12" />
 
+Gambar di atas menunjukkan penerapan abstraction pada class Reservasi. Class tersebut dibuat sebagai abstract class, sehingga digunakan sebagai dasar untuk class ReservasiStandard dan ReservasiVIP, bukan untuk membuat object secara langsung.
 
-Gambar di atas menampilkan struktur package pada program Sistem Tracking Reservasi Hotel. Program menerapkan pola MVC (Model, View, Controller) untuk memisahkan bagian data, tampilan, dan proses pengendalian program.
+<img width="502" height="85" alt="image" src="https://github.com/user-attachments/assets/8060c160-ea4c-48a9-946e-73482a8dea5c" />
 
-Struktur program terdiri dari tiga package utama, yaitu:
-
-1. **Package Model**  
-   Package `model` berisi class `Reservasi`, `ReservasiStandard`, dan `ReservasiVIP`. Package ini digunakan untuk menyimpan data serta aturan yang berkaitan dengan reservasi hotel.
-
-2. **Package View**  
-   Package `view` berisi class `ReservasiView` yang digunakan untuk menampilkan menu, daftar reservasi, dan pesan kepada pengguna.
-
-3. **Package Controller**  
-   Package `controller` berisi class `ReservasiController` yang berfungsi sebagai penghubung antara Model dan View. Controller mengatur proses seperti menambah, menampilkan, memperbarui, menghapus, check-in, dan check-out reservasi.
-
-Selain ketiga package tersebut, terdapat class `SistemReservasiHotel` yang menjadi main classs.
+Pada class Reservasi terdapat dua abstract method, yaitu getTipe() dan getDetailTambahan(). Kedua method tersebut hanya dideklarasikan tanpa isi dan nantinya harus diimplementasikan oleh masing-masing subclass sesuai dengan karakteristik reservasinya.
 
 ---
 
-## 3.2 Inheritance
+## 3.3 Inheritance
 
 Inheritance digunakan untuk membuat hubungan antara superclass dan subclass.
 
@@ -219,7 +263,7 @@ Pada program ini:
 
 Class `Reservasi` menjadi superclass, sedangkan `ReservasiStandard` dan `ReservasiVIP` menjadi subclass.
 
-### 1. Reservasi Standard
+### 3.3.1 Reservasi Standard
 
 <img width="528" height="80" alt="image" src="https://github.com/user-attachments/assets/6e7fb0cb-c33c-4b4d-960c-82fbeefc1f33" />
 
@@ -228,7 +272,7 @@ Reservasi Standard memiliki karakteristik khusus berupa kebijakan **denda pembat
 
 Atribut tersebut digunakan untuk menentukan jumlah denda ketika reservasi Standard dibatalkan sebelum selesai.
 
-### 2. Reservasi VIP
+### 3.3.2. Reservasi VIP
 
 
 <img width="460" height="120" alt="image" src="https://github.com/user-attachments/assets/a7c47971-e4ad-478a-a0ff-cbd38d48f81e" />
@@ -248,7 +292,7 @@ Setiap jenis penyambutan memiliki biaya tambahan yang berbeda.
 
 ---
 
-## 3.3 Encapsulation
+## 3.4 Encapsulation
 
 Encapsulation diterapkan dengan menggunakan access modifier `private` pada atribut class.
 
@@ -277,7 +321,7 @@ Sedangkan untuk mengubah data digunakan setter seperti gambar di atas
 
 ---
 
-## 3.4 Constructor
+## 3.5 Constructor
 
 Constructor digunakan untuk memberikan nilai awal ketika object dibuat.
 
@@ -311,34 +355,45 @@ Contohnya:
 
 ---
 
-## 3.5 Polymorphism
+## 3.6 Polymorphism
 
-Polymorphism diterapkan dengan menggunakan satu tipe superclass untuk menyimpan object dari subclass yang berbeda.
+### 3.6.1 Method Overloading
 
-Pada Controller digunakan:
+<img width="892" height="412" alt="image" src="https://github.com/user-attachments/assets/c6ce62d0-d29f-479b-aa4b-d2490a506ea3" />
 
-``` private ArrayList<Reservasi> daftarReservasi = new ArrayList<>(); ```
+Gambar di atas menunjukkan penerapan method overloading pada class ReservasiView. Method tampilkanDaftar() dibuat sebanyak dua kali dengan nama yang sama, tetapi memiliki parameter yang berbeda.
 
-ArrayList tersebut dapat menyimpan:
+Method pertama menerima parameter ArrayList<Reservasi> dan digunakan untuk menampilkan seluruh data reservasi. Sedangkan method kedua menerima parameter ArrayList<Reservasi> dan String status yang digunakan untuk menampilkan data reservasi berdasarkan status tertentu.
 
-ReservasiStandard dan ReservasiVIP
+Dengan adanya method overloading, satu nama method dapat digunakan untuk beberapa kebutuhan yang berbeda berdasarkan parameter yang diberikan.
 
-Contohnya:
+### 3.6.1 Method Overriding
+Saya menerapkan method overriding pada class ReservasiStandard dan ReservasiVIP. Method overriding terjadi ketika subclass membuat kembali method yang sudah didefinisikan pada superclass Reservasi dengan implementasi yang disesuaikan dengan jenis reservasinya.
 
-```
-Reservasi r = new ReservasiStandard(
-        idBerikutnya, namaTamu, jumlahMalam);
-```
+<img width="606" height="356" alt="image" src="https://github.com/user-attachments/assets/dd7c4dd4-08ee-4340-ab3a-ac1071d632af" />
 
-atau:
+Pada ReservasiStandard, terdapat overriding pada method getTipe() dan getDetailTambahan(). Method getTipe() mengembalikan nilai "Standard", sedangkan getDetailTambahan() menampilkan informasi mengenai denda pembatalan.
 
-```
-Reservasi r = new ReservasiVIP(
-        idBerikutnya, namaTamu, jumlahMalam, jenisPenyambutan);
-```
+<img width="725" height="397" alt="image" src="https://github.com/user-attachments/assets/230ff704-8ecb-4048-90a5-e1f8945d0a9e" />
 
-Meskipun keduanya menggunakan tipe Reservasi, method yang dioverride akan menjalankan perilaku sesuai dengan object sebenarnya.
+Pada ReservasiVIP, method getTipe() mengembalikan nilai **"VIP", sedangkan getDetailTambahan()menampilkan jenis penyambutan dan biaya tambahannya. Selain itu,hitungTotalBiaya()` juga dioverride untuk menambahkan biaya penyambutan ke dalam total biaya reservasi VIP.
 
+Dengan adanya method overriding, method yang sama dapat memiliki perilaku yang berbeda sesuai dengan subclass yang digunakan.
+
+## 3.7 Interface (nilai tambah)
+
+<img width="572" height="222" alt="image" src="https://github.com/user-attachments/assets/264a90f7-320a-4e91-a0d9-afc8c68b4b0d" />
+
+Gambar di atas menunjukkan penerapan interface pada program Sistem Tracking Reservasi Hotel. Program menggunakan interface DapatDidenda untuk menentukan method yang digunakan dalam menghitung denda pembatalan.
+
+<img width="826" height="61" alt="Screenshot 2026-10-03 112314" src="https://github.com/user-attachments/assets/46b34826-c328-4708-8539-87fa047364ed" />
+
+Dengan implements DapatDidenda, class ReservasiStandard harus menyediakan implementasi dari method yang terdapat pada interface tersebut, yaitu hitungDenda().
+
+<img width="668" height="112" alt="Screenshot 2026-10-03 112325" src="https://github.com/user-attachments/assets/eaeb2a96-85af-4681-b8a1-ed2cb6343890" />
+
+Method tersebut digunakan untuk menghitung denda pembatalan berdasarkan total biaya reservasi dan persentase denda yang dimiliki oleh Reservasi Standard.
+Dengan demikian, interface DapatDidenda memberikan aturan bahwa class yang mengimplementasikannya harus memiliki kemampuan untuk menghitung denda.
 
 ---
 
@@ -348,6 +403,6 @@ Sistem Reservasi Hotel merupakan program Java yang digunakan untuk mengelola dan
 
 Program menyediakan fitur tambah reservasi, tampilkan reservasi, check-in, check-out, update jumlah malam, dan hapus reservasi. Program juga membedakan reservasi menjadi Standard dan VIP dengan karakteristik dan aturan biaya yang berbeda.
 
-Dalam pembuatannya, program menerapkan konsep Pemrograman Berorientasi Objek seperti **encapsulation, inheritance, polymorphism, constructor, serta getter dan setter**. Selain itu, program menggunakan pola **Model-View-Controller (MVC)** untuk memisahkan bagian model, tampilan, dan proses pengendalian.
+Dalam pembuatannya, program menerapkan konsep Pemrograman Berorientasi Objek seperti **encapsulation, inheritance, polymorphism, constructor, getter dan setter, interface, dan abstraction**. Selain itu, program menggunakan pola **Model-View-Controller (MVC)** untuk memisahkan bagian model, tampilan, dan proses pengendalian.
 
 Dengan penerapan konsep tersebut, program menjadi lebih terstruktur dan setiap class memiliki fungsi yang lebih jelas dalam pengelolaan sistem reservasi hotel.
